@@ -1,0 +1,17 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+:root{
+  background-color: rgb(18, 18, 18);
+  color: white;
+  text-align: center;
+}
+
+.body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
