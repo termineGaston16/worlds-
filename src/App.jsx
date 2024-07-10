@@ -11,7 +11,7 @@ const ResultsProvider = lazy(() => import("./context/results").then(module => ({
 export default function App() {
     return (<>
         <BrowserRouter>
-            <Suspense fallback={<h3>Cargando App...</h3>}>
+            <Suspense fallback={<h3 style={{marginTop:"10rem", color:"white", textShadow:"0px 0px 1rem black"}}>Cargando App...</h3>}>
                 <Header />
 
                 <ResultsProvider>

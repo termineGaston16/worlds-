@@ -2,6 +2,7 @@ import {  useNavigate } from "react-router-dom";
 import { useSearch } from "../hooks/useSearch";
 import { useContext } from "react";
 import { ResultsContext } from "../context/results";
+import "../css/search.css"
 
 export default function Search() {
 
@@ -18,9 +19,9 @@ export default function Search() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="search" name="inputSearchCountries" />
-            <button type="submit">search</button>
+        <form className="form-Search" onSubmit={handleSubmit}>
+            <input className="form-input-Search" type="search" name="inputSearchCountries" />
+            <button className="form-button-Search" type="submit">buscar</button>
         </form>
     )
 }

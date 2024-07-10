@@ -1,0 +1,36 @@
+.form-Search {
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 1.4rem;
+
+    display: flex;
+    place-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.form-input-Search {
+    border: none;
+    outline: none;
+
+    width: 15rem;
+    height: 1.7rem;
+    border-radius: 2rem;
+    padding: 0px 1rem;
+
+    font-size: 1.2rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.form-button-Search {
+    border: none;
+    width: 5rem;
+    height: 1.7rem;
+    border-radius: 2rem;
+    background-color: rgb(40, 40, 40);
+    color: white;
+    font-weight: 500;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
