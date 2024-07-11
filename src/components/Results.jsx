@@ -13,6 +13,10 @@ export default function Results() {
         callToApi()
     }
 
+    const showResults = (result, isTrue, isFalse) => {
+        return (result) ? isTrue : isFalse
+    }
+
     const handleScroll = useCallback(() => {
         if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 50 && !loading) {
             callToApi();
@@ -35,34 +39,100 @@ export default function Results() {
     // Si hay resultado único 
     if (results && uniqueResult) return (<>
         <div className="div-limit-Results">
-            <span>Nombre Oficial</span>
-            <span>{(results[0].name.official) ? results[0].name.official : "Desconocido"}</span>
 
-            <span>Nombre Nativo</span>
-            <span>{(Object.values(results[0].name.nativeName)[0].common) ? Object.values(results[0].name.nativeName)[0].common : "Desconocido"}</span>
-            <span>{(results[0].independent) ? "País independiente" : ""}</span>
+            <div className="div-contenedor-Results">
+                <div className="div-contenedor-parte1-Results">
+                    <div className="div-contenedor-parte1-title-Results">
+
+                        {/* Nombre Nativo */}
+                        <div className="div-contenedor-parte1-title-nombreNativo-Results">
+                            <span className="div-contenedor-parte1-title-TitleSpan-Results">Nombre Nativo</span>
+                            <span className="div-contenedor-parte1-title-nameCountry-Results">{showResults(Object.values(results[0].name.nativeName)[0].common, Object.values(results[0].name.nativeName)[0].common, "Desconocido")}</span>
+
+                            {/* ¿País Independiente? */}
+                            <span className="div-contenedor-parte1-title-paisIndependiente-Results">{showResults(results[0].independent, "País independiente", "")}</span>
+                        </div>
 
 
-            <span>Código de País:</span>
-            <span>{(results[0].cca2) ? results[0].cca2 : ""}</span>
-            <span>{(results[0].ccn3) ? results[0].ccn3 : ""}</span>
-            <span>{(results[0].cca3) ? results[0].cca3 : ""}</span>
-            <span>{(results[0].cioc) ? results[0].cioc : ""}</span>
+                        {/* Nombre Oficial */}
+                        <div className="div-contenedor-parte1-title-nombreOficial-Results">
+                            <span className="div-contenedor-parte1-title-TitleSpan-Results">Nombre Oficial</span>
+                            <span className="div-contenedor-parte1-title-nameOficial-Results">{showResults(results[0].name.official, results[0].name.official, "Desconocido")}</span>
+                        </div>
+                    </div>
 
-            <span>Capital: </span>
-            <span>{(results[0].capital) ? results[0].capital : "Desconocida"}</span>
 
-            <span>Región: </span>
-            <span>{(results[0].region) ? results[0].region : "Desconocida."}</span>
+                    <div className="div-contenedor-parte1-BanderaYDatas-Results">
 
-            <span>Lenguaje: </span>
-            <span>{(results[0].languages) ? (
+                        {/* Bandera */}
+                        <div className="div-contenedor-parte1-BanderaYDatas-banderaContenedor-Results">
+                            {(results[0].flags) ?
+                                (<img className="div-contenedor-parte1-BanderaYDatas-banderaContenedorImg-Results" src={results[0].flags.png} alt={results[0].flags.alt} />) :
+                                "Bandera no Encontrada"
+                            }
+                        </div>
 
-                Object.values(results[0].languages).map((lang, index) => (
-                    <span key={index}>{lang} </span>
-                ))
 
-            ) : "Desconocida"}</span>
+                        <div className="div-contenedor-parte1-BanderaYDatas-dataContenedor-Results">
+
+                            {/* Código de País: */}
+                            <div style={{ display: "flex", alignContent: "center", justifyContent: "center", flexDirection: "column" }}>
+                                <span className="div-contenedor-parte1-title-TitleSpan-Results">Código de País:</span>
+                                <div style={{ listStyle: "none", display: "flex", alignContent: "center", justifyContent: "space-around", gap: "1rem", flexWrap: "wrap" }}>
+                                    <span>{showResults(results[0].cca2, results[0].cca2, "")}</span>
+                                    <span>{showResults(results[0].ccn3, results[0].ccn3, "")}</span>
+                                    <span>{showResults(results[0].cca3, results[0].cca3, "")}</span>
+                                    <span>{showResults(results[0].cioc, results[0].cioc, "")}</span>
+                                </div>
+                            </div>
+
+                            {/* Capital: */}
+                            <div style={{ display: "flex", alignContent: "center", justifyContent: "center", flexDirection: "column" }}>
+                                <span className="div-contenedor-parte1-title-TitleSpan-Results">Capital: </span>
+                                <span>{showResults(results[0].capital, results[0].capital, "Desconocida")}</span>
+                            </div>
+
+                            {/* Región: */}
+                            <div style={{ display: "flex", alignContent: "center", justifyContent: "center", flexDirection: "column" }}>
+                                <span className="div-contenedor-parte1-title-TitleSpan-Results">Región: </span>
+                                <span>{showResults(results[0].region, results[0].region, "Desconocida")}</span>
+                            </div>
+
+                            {/* Lenguaje: */}
+                            <div style={{ display: "flex", alignContent: "center", justifyContent: "center", flexDirection: "column" }}>
+                                <span className="div-contenedor-parte1-title-TitleSpan-Results">Lenguaje: </span>
+                                <span>{(results[0].languages) ? (
+
+                                    Object.values(results[0].languages).map((lang, index) => (
+                                        <span key={index}>{lang} </span>
+                                    ))
+
+                                ) : "Desconocida"}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="div-contenedor-parte2-Results">
+                    <div style={{ display: "flex", alignContent: "center", justifyContent: "center", flexDirection: "column" }}>
+                        {/* Países Limítrofes: */}
+                        <span className="div-contenedor-parte1-title-TitleSpan-Results">Países Limítrofes:</span>
+                        {
+                            (results[0].borders) ? (
+                                <ul style={{ listStyle: "none", display: "flex", alignContent: "center", justifyContent: "space-around", gap: "1rem", flexWrap: "wrap" }}>
+                                    {results[0].borders?.map((country, index) => (
+                                        <li key={index}>{country}</li>
+                                    ))}
+                                </ul>
+                            ) : "Sin Hermanos."
+                        }
+                    </div>
+                    <div className="div-contenedor-parte2-contenedorlink-Results">
+                        {/* Map: */}
+                        <a className="div-contenedor-parte2-link-Results" href={results[0].maps.googleMaps} target="_blank"> Ir a Google Maps</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </>)
 
